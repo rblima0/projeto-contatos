@@ -1,9 +1,8 @@
 <?php
-require 'environment.php';
+require "environment.php";
 
 $config = array();
-
-if(ENVIRONMENT == 'development') {
+if (ENVIRONMENT == 'development') {
     define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto_estrutura_mvc/");
     $config['dbname'] = 'bseteweb_estrutura_mvc';
     $config['host'] = 'localhost';
@@ -18,7 +17,6 @@ if(ENVIRONMENT == 'development') {
 }
 
 global $db;
-
 try {
     $db = new PDO("mysql:dbname=".$config['dbname'].";host=".$config['host'], $config['dbuser'], $config['dbpass']);
 } catch(PDOException $e) {

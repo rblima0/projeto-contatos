@@ -1,1 +1,3 @@
-<h1>Página Inicial</h1>
+<h2>Página Principal</h2>
+
+<p>Usuário: <?php echo $nome ?>, Idade: <?php echo $idade ?></p>
