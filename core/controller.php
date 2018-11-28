@@ -1,7 +1,8 @@
 <?php
+
+/* CRIANDO AJUDADOR CONTROLLER */
 class controller {
 
-    /* CRIANDO AJUDADORES */
     public function loadView($viewName, $viewData = array()) {
         extract($viewData);
         require 'views/'.$viewName.'.php';
