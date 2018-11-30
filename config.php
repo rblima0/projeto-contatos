@@ -3,7 +3,7 @@ require "environment.php";
 
 $config = array();
 if (ENVIRONMENT == 'development') {
-    define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto_estrutura_mvc/");
+    define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto-estrutura-mvc/");
     $config['dbname'] = 'bseteweb_estrutura_mvc';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
