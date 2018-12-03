@@ -1,3 +1,3 @@
-<h2>Página Principal</h2>
-
-<p>Usuário: <?php echo $nome ?></br>Idade: <?php echo $idade ?></br>Quantidade de Anuncios: <?php echo $quantidade_anuncios ?></p>
+<div class="container">
+    <h1>Bem Vindo</h1>
+</div>

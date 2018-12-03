@@ -3,14 +3,14 @@ require "environment.php";
 
 $config = array();
 if (ENVIRONMENT == 'development') {
-    define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto-estrutura-mvc/");
-    $config['dbname'] = 'bseteweb_estrutura_mvc';
+    define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto-mvc-contatos/");
+    $config['dbname'] = 'bseteweb_crudoo';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
     $config['dbpass'] = '';
 } else {
     define("BASE_URL", "http://meusite.com.br/");
-    $config['dbname'] = 'bseteweb_estrutura_mvc';
+    $config['dbname'] = 'bseteweb_crudoo';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
     $config['dbpass'] = '';
