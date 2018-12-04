@@ -3,7 +3,7 @@ require "environment.php";
 
 $config = array();
 if (ENVIRONMENT == 'development') {
-    define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto-mvc-contatos/");
+    define("BASE_URL", "http://localhost/phpdozeroprofissional/projeto-contatos/");
     $config['dbname'] = 'bseteweb_crudoo';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';

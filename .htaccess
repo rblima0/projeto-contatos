@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /phpdozeroprofissional/projeto-mvc-contatos/index.php?url=$1 [QSA,L]
+RewriteRule ^(.*)$ /phpdozeroprofissional/projeto-contatos/index.php?url=$1 [QSA,L]
