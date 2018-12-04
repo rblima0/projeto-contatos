@@ -1,4 +1,6 @@
 <?php
+
+/* CLASSE DE TESTE */
 class Usuario extends model {
 
     /* PROPRIEDADES */
