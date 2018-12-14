@@ -14,16 +14,14 @@ class contatoController extends controller {
             $nome = $_POST["nome"];
             $telefone = $_POST["telefone"];
             $email = $_POST["email"];
-            $foto = $_FILES['foto'];
+            $foto = $_FILES["foto"];
             
             $contato = new Contato();
-            if($contato->adicionar($email, $nome, $telefone, $foto)) {
-                header("Location: ".BASE_URL);
-            }
+            $contato->adicionar($email, $nome, $telefone, $foto);
         } else {
             header("Location: ".BASE_URL."contato/adicionar");
         }
-        header("Location: ".BASE_URL."contato/adicionar");
+        header("Location: ".BASE_URL);
     }
 
     public function editar($id) {
@@ -41,17 +39,20 @@ class contatoController extends controller {
     }
 
     public function editar_submit() {
-        if(!empty($_POST["id"])) {
+        if(!empty($_POST["id"]) && !empty($_POST["email"])) {
             $nome = $_POST["nome"];
             $telefone = $_POST["telefone"];
             $email = $_POST["email"];
             $id = $_POST["id"];
 
-            $contato = new Contato();
-        
-            if(!empty($email)) {
-                $contato->editar($nome, $telefone, $email, $id);
+            if(isset($_FILES['foto'])) {
+                $foto = $_FILES['foto'];
+            } else {
+                $foto = array();
             }
+
+            $contato = new Contato();
+            $contato->editar($nome, $telefone, $email, $foto, $id);
         } 
         header("Location: ".BASE_URL);
     }

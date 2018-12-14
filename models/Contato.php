@@ -57,19 +57,15 @@ class Contato extends model {
 
                 imagecopyresampled($img, $orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
                 imagejpeg($img, "assets/images/contatos/".$nome_imagem, 80);
-         
                 $error = array();
          
-                // Verifica se o arquivo é uma imagem
+                // VERIFICAÇÃO DE IMAGEM
                 if(!preg_match("/^image\/(jpeg|png)$/", $foto["type"])) {
                     $error[1] = "Isso não é uma imagem.";
-                } 
-         
-                // Se não houver nenhum erro
+                }
+                
+                // VERIFICAÇÃO DE ERROS
                 if (count($error) == 0) {
-                   
-         
-                    // INSERE DADOS NO BANCO
                     $sql = "INSERT INTO contatos (nome, telefone, email, foto) VALUES (:nome, :telefone, :email, :foto)";
                     $sql = $this->db->prepare($sql);
                     $sql->bindValue(':nome', $nome);
@@ -85,39 +81,103 @@ class Contato extends model {
                         echo $erro . "<br />";
                     }
                 }
+            } else {
+                $sql = "INSERT INTO contatos (nome, telefone, email) VALUES (:nome, :telefone, :email)";
+                $sql = $this->db->prepare($sql);
+                $sql->bindValue(':nome', $nome);
+                $sql->bindValue(':telefone', $telefone);
+                $sql->bindValue(':email', $email);
+                $sql->execute();
             }
-            
             return true;
         } else {
             return false;
         }
     }
 
-    public function editar($nome, $telefone, $email, $id) {
+    public function editar($nome, $telefone, $email, $foto, $id) {
+
+        /* TESTA SE EMAIL JA EXISTE */
         if($this->existeEmail($email) == false) {
-            $sql = "UPDATE contatos SET nome = :nome, telefone = :telefone, email = :email WHERE id = :id";
-            /* $sql = "UPDATE contatos SET nome = ?, email = ? WHERE id = ?"; */
+            $sql = "UPDATE contatos SET email = :email WHERE id = :id";
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":nome", $nome);
-            $sql->bindValue(":telefone", $telefone);
             $sql->bindValue(":email", $email);
             $sql->bindValue(":id", $id);
             $sql->execute();
-            /* $sql->execute(array($nome, $email, $id)); */
-            
-            return true;
-        } else {
-            $sql = "UPDATE contatos SET nome =:nome WHERE id=:id";
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":nome", $nome);
-            $sql->bindValue(":id", $id);
-            $sql->execute();
-            
-            return true;
         }
+
+        /* ALTERA OUTROS CAMPOS */
+        $sql = "UPDATE contatos SET nome = :nome, telefone = :telefone WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":nome", $nome);
+        $sql->bindValue(":telefone", $telefone);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+        /* VERIFICA SE ESTA SUBINDO NOVA IMAGEM */
+        if (!empty($foto["name"])) {
+            $this->excluirFoto($id);
+            preg_match("/\.(png|jpg|jpeg){1}$/i", $foto["name"], $ext);
+            $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+            $caminho_imagem = "assets/images/contatos/" . $nome_imagem;
+            move_uploaded_file($foto["tmp_name"], $caminho_imagem);
+
+            list($width_orig, $height_orig) = getimagesize("assets/images/contatos/".$nome_imagem);
+            $ratio = $width_orig/$height_orig;
+            $width = 60;
+            $height = 60;
+
+            if($width/$height > $ratio) {
+                $width = $height*$ratio;
+            } else {
+                $height = $width/$ratio;
+            }
+
+            $img = imagecreatetruecolor($width, $height);
+
+            if($foto["type"] == 'image/jpeg') {
+                $orig = imagecreatefromjpeg("assets/images/contatos/".$nome_imagem);
+            } else if($foto["type"] == 'image/png') {
+                $orig = imagecreatefrompng("assets/images/contatos/".$nome_imagem);
+            }
+
+            imagecopyresampled($img, $orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+            imagejpeg($img, "assets/images/contatos/".$nome_imagem, 80);
+        
+            $error = array();
+        
+            if(!preg_match("/^image\/(jpg|jpeg|png)$/", $foto["type"])) {
+                $error[1] = "Isso não é uma imagem.";
+            } 
+        
+            if (count($error) == 0) {
+                $sql = "UPDATE contatos SET foto = :foto WHERE id = :id";
+                $sql = $this->db->prepare($sql);
+                $sql->bindValue(":foto", $nome_imagem);
+                $sql->bindValue(":id", $id);
+                $sql->execute();
+            }
+        
+            if (count($error) != 0) {
+                foreach ($error as $erro) {
+                    echo $erro . "<br />";
+                }
+            }
+        }
+        return true;
     }
 
     public function excluir($id) {
+        $this->excluirFoto($id);
+
+        $sql = "DELETE FROM contatos WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+    }
+
+    /* METODO PARA REMOVER IMAGEM DA PASTA */
+    public function excluirFoto($id) {
         $sql = "SELECT foto FROM contatos WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id);
@@ -129,14 +189,9 @@ class Contato extends model {
                 unlink("assets/images/contatos/".$item['foto']);
             }
         }
-
-        $sql = "DELETE FROM contatos WHERE id = :id";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id);
-        $sql->execute();
     }
 
-    /* METODO AUXILIAR PARA VERIFICAR EMAIL */
+    /* METODO PARA VERIFICAR SE EXISTE EMAIL */
     private function existeEmail($email) {
         $sql = "SELECT * FROM contatos WHERE email = :email";
         $sql = $this->db->prepare($sql);

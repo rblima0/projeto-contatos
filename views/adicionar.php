@@ -4,7 +4,7 @@
 
     <h2>Formulário de Contato</h2>
 
-    <form method="POST" action="<?php echo BASE_URL; ?>contato/adicionar_submit" enctype="multipart/form-data" >
+    <form method="POST" enctype="multipart/form-data" action="<?php echo BASE_URL; ?>contato/adicionar_submit"  >
 
         <div class="form-group">
             <label for="nome">Nome: </label>
