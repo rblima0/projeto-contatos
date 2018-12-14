@@ -1,25 +1,28 @@
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
 thead {
     background-color: #3F51B5;
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 tbody {
     background-color: #d2d2d2;
 }
 
+th {
+    text-transform: uppercase;
+}
+
 td {
-    text-align: center;
-    width: 200px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 h2 {
     text-transform: uppercase;
+    text-align: center;
 }
 
 p {
@@ -27,7 +30,7 @@ p {
 }
 
 form {
-    padding: 1em 0;
+    padding: 1em 1.5em;
     background-color: #f3f3f3;
 }
 
@@ -64,7 +67,7 @@ a:hover {
     cursor: pointer;
 }
 
-.modal_bg {
+/* .modal_bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -85,4 +88,13 @@ a:hover {
     left: 50%;
     margin-left: -200px;
     padding: 0.5em;
+} */
+
+nav.navbar.navbar-inverse a {
+    background-color: transparent;
+}
+
+.skin {
+    border-radius: 50%;
+    height: 50px;
 }

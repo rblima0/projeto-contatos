@@ -1,11 +1,33 @@
  
-<a href="<?php echo BASE_URL; ?>">[PÁGINA PRINCIPAL]</a>
+<div class="container">
+    <div class="row">
 
-<h2>Formulário de Contato</h2>
-<form method="POST" action="<?php echo BASE_URL; ?>contato/adicionar_submit">
-    <p>Nome: </p>
-    <input type="text" name="nome" placeholder="Informe seu Nome...">
-    <p>E-mail: </p>
-    <input type="email" name="email" placeholder="Informe seu E-mail..."/><br>
-    <input type="submit" value="Cadastrar">
-</form>
+    <h2>Formulário de Contato</h2>
+
+    <form method="POST" action="<?php echo BASE_URL; ?>contato/adicionar_submit" enctype="multipart/form-data" >
+
+        <div class="form-group">
+            <label for="nome">Nome: </label>
+            <input type="text" name="nome" placeholder="Informe seu Nome..." class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">Telefone: </label>
+            <input type="number" name="telefone" placeholder="Informe seu Telefone..." class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail: </label>
+            <input type="mail" name="email" placeholder="Informe seu E-mail..." class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="foto">Foto: </label>
+            <input type="file" name="foto" class="form-control" />
+        </div>
+
+        <input type="submit" value="Cadastrar" class="btn btn-default">
+    </form>
+
+    </div>
+</div>

@@ -1,9 +1,7 @@
 <?php
 class contatoController extends controller {
     
-    public function index() {
-        
-    }
+    public function index() { }
 
     public function adicionar() {
         $dados = array();
@@ -14,16 +12,18 @@ class contatoController extends controller {
     public function adicionar_submit() {
         if(!empty($_POST["email"])) {
             $nome = $_POST["nome"];
+            $telefone = $_POST["telefone"];
             $email = $_POST["email"];
+            $foto = $_FILES['foto'];
             
             $contato = new Contato();
-            if($contato->adicionar($email, $nome)) {
+            if($contato->adicionar($email, $nome, $telefone, $foto)) {
                 header("Location: ".BASE_URL);
             }
         } else {
             header("Location: ".BASE_URL."contato/adicionar");
         }
-
+        header("Location: ".BASE_URL."contato/adicionar");
     }
 
     public function editar($id) {
@@ -43,13 +43,14 @@ class contatoController extends controller {
     public function editar_submit() {
         if(!empty($_POST["id"])) {
             $nome = $_POST["nome"];
+            $telefone = $_POST["telefone"];
             $email = $_POST["email"];
             $id = $_POST["id"];
 
             $contato = new Contato();
         
             if(!empty($email)) {
-                $contato->editar($nome, $email, $id);
+                $contato->editar($nome, $telefone, $email, $id);
             }
         } 
         header("Location: ".BASE_URL);
