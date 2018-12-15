@@ -1,15 +1,23 @@
 <?php
-class contatoController extends controller {
+namespace Controllers;
+
+use \Core\Controller;
+use \Models\Contato;
+
+class ContatoController extends Controller
+{
     
     public function index() { }
 
-    public function adicionar() {
+    public function adicionar() 
+    {
         $dados = array();
         
         $this->loadTemplate('adicionar', $dados);
     }
 
-    public function adicionar_submit() {
+    public function adicionar_submit()
+    {
         if(!empty($_POST["email"])) {
             $nome = $_POST["nome"];
             $telefone = $_POST["telefone"];
@@ -24,7 +32,8 @@ class contatoController extends controller {
         header("Location: ".BASE_URL);
     }
 
-    public function editar($id) {
+    public function editar($id)
+    {
         $dados = array();
 
         if(!empty($id)) {
@@ -38,7 +47,8 @@ class contatoController extends controller {
         $this->loadTemplate('editar', $dados);
     }
 
-    public function editar_submit() {
+    public function editar_submit()
+    {
         if(!empty($_POST["id"]) && !empty($_POST["email"])) {
             $nome = $_POST["nome"];
             $telefone = $_POST["telefone"];
@@ -57,7 +67,8 @@ class contatoController extends controller {
         header("Location: ".BASE_URL);
     }
 
-    public function excluir($id) {
+    public function excluir($id)
+    {
         if(!empty($id)) {
             $contato = new Contato();
             $contato->excluir($id);

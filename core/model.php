@@ -1,11 +1,12 @@
 <?php
+namespace Core;
 
-/* CRIANDO AJUDADOR MODEL */
-class model {
-
+class Model
+{
     protected $db;
 
-    public function __construct() {
+    public function __construct() 
+    {
         global $db;
         $this->db = $db;
     }

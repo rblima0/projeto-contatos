@@ -1,10 +1,11 @@
 <?php
 session_start();
 require "config.php";
+require 'vendor/autoload.php';
 
 /* echo "URL: " . $_GET['url']; */
 
-spl_autoload_register(function($class) {
+/* spl_autoload_register(function($class) {
     if(file_exists('controllers/'.$class.'.php')) {
         require 'controllers/'.$class.'.php';
     } else if(file_exists('models/'.$class.'.php')) {
@@ -12,7 +13,7 @@ spl_autoload_register(function($class) {
     } else if(file_exists('core/'.$class.'.php')) {
         require 'core/'.$class.'.php';
     }
-});
+}); */
 
-$core = new Core();
+$core = new Core\Core();
 $core->run();

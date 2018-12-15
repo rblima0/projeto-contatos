@@ -1,7 +1,15 @@
 <?php
-class homeController extends controller {
+namespace Controllers;
+
+use \Core\Controller;
+use \Models\Contato;
+use \Models\Usuario;
+
+class HomeController extends Controller 
+{
     
-    public function index() {
+    public function index()
+    {
         $dados = array();
 
         $contato = new Contato();

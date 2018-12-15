@@ -1,7 +1,10 @@
 <?php
+namespace Models;
+use \Core\Model;
 
 /* CLASSE DE TESTE */
-class Usuario extends model {
+class Usuario extends Model
+{
 
     /* PROPRIEDADES */
     private $id;
@@ -10,7 +13,8 @@ class Usuario extends model {
     private $senha;
 
     /* CONSTRUTOR */
-    public function __construct($i = null) {
+    public function __construct($i = null)
+    {
         if(!empty($i)) {
             $sql = "SELECT * FROM usuarios WHERE id = ?";
             $sql = $this->db->prepare($sql);
@@ -27,32 +31,39 @@ class Usuario extends model {
     }
 
     /* GETTERS AND SETTERS */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setNome($n) {
+    public function setNome($n)
+    {
         $this->nome = $n;
     }
 
-    public function getNome() {
+    public function getNome()
+    {
         return $this->nome;
     }
 
-    public function setEmail($e) {
+    public function setEmail($e)
+    {
         $this->email = $e;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setSenha($s) {
+    public function setSenha($s)
+    {
         $this->senha = md5($s);
     }
 
     /* METODOS */
-    public function salvar() {
+    public function salvar()
+    {
         if(!empty($this->id)) {
             $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
             $sql = $this->db->prepare($sql);
@@ -64,7 +75,8 @@ class Usuario extends model {
         }
     }
 
-    public function delete(){
+    public function delete()
+    {
         $sql = "DELETE FROM usuarios WHERE id = ?";
         $sql = $this->db->prepare($sql);
         $sql->execute(array($this->id));

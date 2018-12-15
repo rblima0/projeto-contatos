@@ -1,7 +1,12 @@
 <?php
-class Contato extends model {
+namespace Models;
+use \Core\Model;
 
-    public function getAll($page, $perPage) {
+class Contato extends Model 
+{
+
+    public function getAll($page, $perPage)
+    {
         $array = array();
         $offset = ($page - 1) * $perPage;
 
@@ -14,7 +19,8 @@ class Contato extends model {
         return $array;
     }
 
-    public function getTotal() {
+    public function getTotal()
+    {
         $sql = "SELECT COUNT(*) as c FROM contatos";
         $sql = $this->db->prepare($sql);
         $sql->execute();
@@ -23,7 +29,8 @@ class Contato extends model {
         return $row['c'];
     }
 
-    public function getInfo($id) {
+    public function getInfo($id)
+    {
         $array = array();
 
         $sql = "SELECT * FROM contatos WHERE id = :id";
@@ -37,7 +44,8 @@ class Contato extends model {
         return $array;     
     }
 
-    public function adicionar($email, $nome, $telefone, $foto) {
+    public function adicionar($email, $nome, $telefone, $foto)
+    {
         if($this->existeEmail($email) == false) {
             if (!empty($foto["name"])) {
                 preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto["name"], $ext);
@@ -105,7 +113,8 @@ class Contato extends model {
         }
     }
 
-    public function editar($nome, $telefone, $email, $foto, $id) {
+    public function editar($nome, $telefone, $email, $foto, $id)
+    {
 
         /* TESTA SE EMAIL JA EXISTE */
         if($this->existeEmail($email) == false) {
@@ -177,7 +186,8 @@ class Contato extends model {
         return true;
     }
 
-    public function excluir($id) {
+    public function excluir($id)
+    {
         $this->excluirFoto($id);
 
         $sql = "DELETE FROM contatos WHERE id = :id";
@@ -187,7 +197,8 @@ class Contato extends model {
     }
 
     /* METODO PARA REMOVER IMAGEM DA PASTA */
-    public function excluirFoto($id) {
+    public function excluirFoto($id)
+    {
         $sql = "SELECT foto FROM contatos WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id);
@@ -202,7 +213,8 @@ class Contato extends model {
     }
 
     /* METODO PARA VERIFICAR SE EXISTE EMAIL */
-    private function existeEmail($email) {
+    private function existeEmail($email)
+    {
         $sql = "SELECT * FROM contatos WHERE email = :email";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":email", $email);

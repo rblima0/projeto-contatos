@@ -1,7 +1,11 @@
 <?php
-class Core {
+namespace Core;
 
-    public function run() {
+class Core 
+{
+
+    public function run()
+    {
         $url = '/';
         if(isset($_GET['url'])) {
             $url .= $_GET['url'];
@@ -27,11 +31,22 @@ class Core {
             }
 
         } else {
-            $currentController = 'homeController';
+            $currentController = 'HomeController';
             $currentAction = 'index';
         }
 
-        $c = new $currentController();
+        $currentController = \ucfirst($currentController);
+
+        $prefix = '\Controllers\\';
+
+        if(!file_exists('Controllers/'.$currentController.'.php') || !method_exists($prefix.$currentController, $currentAction)) {
+            $currentController = 'NotfoundController';
+            $currentAction = 'index';
+        }
+
+        $newController = $prefix.$currentController;
+        $c = new $newController();
+
         // EXECUTA FUNÇÃO QUE NÃO SABEMOS EXATAMENTE O NOME
         call_user_func_array(array($c, $currentAction), $params);
 

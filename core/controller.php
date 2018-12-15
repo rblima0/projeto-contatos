@@ -1,20 +1,24 @@
 <?php
+namespace Core;
 
-/* CRIANDO AJUDADOR CONTROLLER */
-class controller {
+class Controller 
+{
 
-    public function loadView($viewName, $viewData = array()) {
+    public function loadView($viewName, $viewData = array())
+    {
         extract($viewData);
-        require 'views/'.$viewName.'.php';
+        require 'Views/'.$viewName.'.php';
     }
 
-    public function loadTemplate($viewName, $viewData = array()) {
-        require 'views/template.php';
+    public function loadTemplate($viewName, $viewData = array())
+    {
+        require 'Views/template.php';
     }
 
-    public function loadViewInTemplate($viewName, $viewData = array()) {
+    public function loadViewInTemplate($viewName, $viewData = array())
+    {
         extract($viewData);
-        require 'views/'.$viewName.'.php';
+        require 'Views/'.$viewName.'.php';
     }
 
 }
