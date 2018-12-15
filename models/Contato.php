@@ -1,16 +1,26 @@
 <?php
 class Contato extends model {
 
-    public function getAll() {
+    public function getAll($page, $perPage) {
         $array = array();
+        $offset = ($page - 1) * $perPage;
 
-        $sql = "SELECT * FROM contatos ORDER BY id";
+        $sql = "SELECT * FROM contatos ORDER BY id LIMIT $offset, $perPage";
         $sql = $this->db->query($sql);
 
         if($sql->rowCount() > 0) {
             $array = $sql->fetchAll();
         }
         return $array;
+    }
+
+    public function getTotal() {
+        $sql = "SELECT COUNT(*) as c FROM contatos";
+        $sql = $this->db->prepare($sql);
+        $sql->execute();
+
+        $row = $sql->fetch();
+        return $row['c'];
     }
 
     public function getInfo($id) {

@@ -1,3 +1,19 @@
+<?php
+    function mask($val, $mask) {
+        $maskared = '';
+        $k = 0;
+        for($i = 0; $i<=strlen($mask)-1; $i++) {
+            if($mask[$i] == '#') {
+                if(isset($val[$k]))
+                $maskared .= $val[$k++];
+            } else {
+                if(isset($mask[$i]))
+                $maskared .= $mask[$i];
+            }
+        }
+        return $maskared;
+    }
+?>
 
     <div class="container">
         <div class="row">
@@ -29,7 +45,7 @@
                         <?php endif; ?>
                     </td>
                     <td><?php echo $item["nome"] ?></td>
-                    <td><?php echo $item["telefone"] ?></td>
+                    <td><?php echo mask($item["telefone"], '(##) # ####-####') ?></td>
                     <td><?php echo $item["email"] ?></td>
                     <td>
                         <a class="btn btn-warning" href="<?php echo BASE_URL; ?>contato/editar/<?php echo $item["id"]; ?>">EDITAR</a>
@@ -43,13 +59,12 @@
 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <?php $p = isset($_GET['p']) ? $_GET['p'] : 0; ?>
+                <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                    <li class="page-item <?php echo ($p == $i) ? 'active': ''; ?>"><a class="page-link" href="<?php echo BASE_URL; ?>?<?php $w = $_GET; $w['p'] = $i; echo http_build_query($w); ?>"><?php echo $i; ?></a></li>
+                <?php endfor; ?>
             </ul>
         </nav>
-        
+
         </div>
     </div>

@@ -8,17 +8,17 @@
 
         <div class="form-group">
             <label for="nome">Nome: </label>
-            <input type="text" name="nome" placeholder="Informe seu Nome..." class="form-control" />
+            <input type="text" name="nome" placeholder="Informe seu Nome..." class="form-control" required />
         </div>
 
         <div class="form-group">
             <label for="telefone">Telefone: </label>
-            <input type="number" name="telefone" placeholder="Informe seu Telefone..." class="form-control" />
+            <input type="number" name="telefone" placeholder="Informe seu Telefone..." class="form-control" required />
         </div>
 
         <div class="form-group">
             <label for="email">E-mail: </label>
-            <input type="mail" name="email" placeholder="Informe seu E-mail..." class="form-control" />
+            <input type="mail" name="email" placeholder="Informe seu E-mail..." class="form-control" required />
         </div>
 
         <div class="form-group">

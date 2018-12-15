@@ -1,6 +1,6 @@
-$(function() {
+$(document).ready(function(){
     
-    $(".modal_ajax").on("click", function(e) {
+    /* $(".modal_ajax").on("click", function(e) {
         e.preventDefault();
 
         $(".modal_bg").show();
@@ -16,6 +16,6 @@ $(function() {
         });
 
         
-    });
+    }); */
 
 })

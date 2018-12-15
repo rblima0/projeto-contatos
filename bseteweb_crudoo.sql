@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Dez-2018 às 00:06
+-- Generation Time: 14-Dez-2018 às 18:26
 -- Versão do servidor: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -28,23 +28,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `contatos` (
   `id` int(11) NOT NULL,
-  `nome` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8 NOT NULL
+  `nome` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `telefone` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `foto` varchar(100) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `contatos`
 --
 
-INSERT INTO `contatos` (`id`, `nome`, `email`) VALUES
-(1, 'Rodrigo Banci', 'rblima0@gmail.com'),
-(2, 'Kathy Santana', 'kathy@gmail.com'),
-(3, 'Juquinha', 'juquinha@gmail.com'),
-(5, 'Uildis', 'uildis@gmail.com'),
-(7, 'Husta', 'husta@gmail.com'),
-(8, 'Desto', 'desto@gmail.com'),
-(9, 'Farin', 'farin@gmail.com'),
-(10, 'Cistys', 'cistys@gmail.com');
+INSERT INTO `contatos` (`id`, `nome`, `telefone`, `email`, `foto`) VALUES
+(1, 'Rodrigo Banci', '11985644158', 'rblima0@gmail.com', ''),
+(19, 'Carlos', '11986838582', 'carlos@gmail.com', '7bda303c5beefbcf0f79e8627ce1c4a8.jpeg'),
+(24, 'Izabel', '1196959395', 'izabel@gmail.com', 'e6914d06406408f7d23ea0a3ac4c90e4.jpg'),
+(18, 'Janaina', '11995919291', 'janaina@gmail.com', '48899bccd5fff5506de5e45718ad4775.jpg'),
+(25, 'Luis', '11985828889', 'luis@gmail.com', '4ae9e35d0107c0f769db6e1ada96d874.jpg');
 
 -- --------------------------------------------------------
 
@@ -91,7 +90,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `contatos`
 --
 ALTER TABLE `contatos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
